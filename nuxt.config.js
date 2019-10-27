@@ -40,7 +40,7 @@ export default {
     '@nuxtjs/axios',
   ],
   axios: {
-    basURL: 'http://127.0.0.1:1337'
+    baseURL: 'http://127.0.0.1:1337'
   },
   /*
   ** Build configuration

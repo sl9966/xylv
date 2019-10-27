@@ -1,7 +1,7 @@
 <template>
   <div class="xyly">
     <Header/>
-    <nuxt/>
+    <nuxt class="content"/>
     <Footer/>
   </div>
 </template>
@@ -17,5 +17,8 @@ export default {
 </script>
 
 <style lang="less" scoped>
-
+.content{
+  height: 700px;
+  min-width: 1000px;
+}
 </style>
