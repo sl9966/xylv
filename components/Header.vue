@@ -9,7 +9,7 @@
         <nuxt-link class="pages_item" to="/air">国内机票</nuxt-link>
       </div>
       <div class="main_login">
-        <el-dropdown>
+        <el-dropdown class="message">
           <span class="el-dropdown-link">
             <i class="el-icon-bell"></i>
             &nbsp;消息&nbsp;
@@ -19,7 +19,19 @@
             <el-dropdown-item>消息</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
-        &nbsp;<nuxt-link to="/user/login">登录 / 注册</nuxt-link>
+        &nbsp;
+        <el-dropdown v-if="userInfo.token" class="user-info">
+          <div class="el-dropdown-link">
+            <img :src="$axios.defaults.baseURL + userInfo.user.defaultAvatar" alt="">
+            <span>{{userInfo.user.nickname}}</span>
+            <i class="el-icon-arrow-down el-icon--right"></i>
+          </div>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item><div>个人中心</div></el-dropdown-item>
+            <el-dropdown-item><div @click="exitLogin">退出</div></el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
+        <nuxt-link v-else to="/user/login/1">登录 / 注册</nuxt-link>
       </div>
     </div>
   </div>
@@ -27,7 +39,20 @@
 
 <script>
 export default {
-
+  computed:{
+    userInfo(){
+      return this.$store.state.user.userInfo
+    }
+  },
+  methods:{
+    exitLogin(){
+      this.$store.commit('user/handleExit')
+      this.$message.success('成功退出')
+      setTimeout(() => {
+        this.$router.push('/user/login/0')
+      }, 2000);
+    }
+  }
 }
 </script>
 
@@ -99,6 +124,24 @@ export default {
       .el-dropdown-link{
         display: flex;
         align-items: center;
+      }
+      .message{
+        cursor: pointer;
+      }
+      .user-info{
+        margin-left: 10px;
+        cursor: pointer;
+        &:hover{
+          img{
+            border: 2px solid #0094ff;
+          }
+        }
+        img{
+          width: 32px;
+          padding: 2px;
+          border-radius: 100%;
+          border: 2px solid transparent;
+        }
       }
     }
   }
