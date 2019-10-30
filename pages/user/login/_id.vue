@@ -35,6 +35,7 @@ export default {
 <style lang="less" scoped>
 .login{
   position: relative;
+  height: 700px;
   .login_main{
     position: absolute;
     background-color: #fff;

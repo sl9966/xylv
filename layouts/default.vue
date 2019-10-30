@@ -18,7 +18,6 @@ export default {
 
 <style lang="less" scoped>
 .content{
-  height: 700px;
   min-width: 1000px;
 }
 </style>

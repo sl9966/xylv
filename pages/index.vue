@@ -8,7 +8,7 @@
     </el-carousel>
     <div class="search">
       <div class="nav">
-        <div class="nav_item" :class="placeholderIndex===index?'active':''" @click="placeholderIndex=index" v-for="(item,index) in nav" :key="index">{{item}}</div>
+        <div class="nav_item"  @click="handleClick(index)" :class="placeholderIndex===index?'active':''" v-for="(item,index) in nav" :key="index">{{item}}</div>
       </div>
       <el-input
       :placeholder="placeholder[placeholderIndex]"
@@ -41,12 +41,21 @@ export default {
       .then(res=>{
         return {lunBoImgs: res.data.data}
       })
+  },
+  methods: {
+    handleClick(index){
+      this.placeholderIndex=index
+      if(index===2){
+        this.$router.push('air')
+      }
+    }
   }
 }
 </script>
 
 <style lang="less" scoped>
 .index{
+  height: 700px;
   position: relative;
   .lunbo_img{
     width: 100%;
@@ -67,14 +76,14 @@ export default {
         padding: 0 15px;
         background-color: rgba(0,0,0,.8);
         color: #fff;
-        margin-right: 10px;
+        margin-right: 13px;
         position: relative;
         z-index: 2;
         &::after{
           content: '';
           position: absolute;
           top: 0;
-          right: -13px;
+          right: -12.4px;
           width: 0;
           height: 0;
           border-left-width: 10px;
